@@ -71,6 +71,7 @@ Var
  US_PHP81          :String;  // PHP 81 root folder
  US_PHP82          :String;  // PHP 82 root folder
  US_PHP83          :String;  // PHP 83 root folder
+ US_PHP84          :String;  // PHP 84 root folder
  US_PHP85          :String;  // PHP 85 root folder
 
  //== FILES ===
@@ -159,6 +160,7 @@ begin
   US_PHP81           := UniConPath +  '\core\php81';        // PHP 81 root folder
   US_PHP82           := UniConPath +  '\core\php82';        // PHP 82 root folder
   US_PHP83           := UniConPath +  '\core\php83';        // PHP 83 root folder
+  US_PHP84           := UniConPath +  '\core\php84';        // PHP 84 root folder
   US_PHP85           := UniConPath +  '\core\php85';        // PHP 85 root folder
 
  //== Files ===
@@ -223,6 +225,7 @@ begin
    If (DirectoryExists(US_PHP81) And (UENV_PHP_SELECT ='php81')) Then php_valid := True;
    If (DirectoryExists(US_PHP82) And (UENV_PHP_SELECT ='php82')) Then php_valid := True;
    If (DirectoryExists(US_PHP83) And (UENV_PHP_SELECT ='php83')) Then php_valid := True;
+   If (DirectoryExists(US_PHP84) And (UENV_PHP_SELECT ='php84')) Then php_valid := True;
    If (DirectoryExists(US_PHP85) And (UENV_PHP_SELECT ='php85')) Then php_valid := True;
    If Not php_valid Then UENV_PHP_SELECT :='None';
 
