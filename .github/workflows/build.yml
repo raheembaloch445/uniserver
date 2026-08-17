@@ -1,0 +1,51 @@
+name: Build UniService (Windows)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Chocolatey (if missing)
+        shell: powershell
+        run: |
+          if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+            Set-ExecutionPolicy Bypass -Scope Process -Force
+            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+            iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+          } else {
+            Write-Host 'choco already installed'
+          }
+
+      - name: Install Lazarus & FPC
+        shell: powershell
+        run: |
+          choco install lazarus -y --no-progress
+          choco install fpc -y --no-progress
+
+      - name: Verify lazbuild
+        shell: powershell
+        run: |
+          lazbuild --version
+
+      - name: Build UniService
+        shell: powershell
+        run: |
+          cd UniService
+          lazbuild UniService.lpi
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: uniservice-build
+          path: |
+            UniService/UniService.exe
+            UniService/*.exe
