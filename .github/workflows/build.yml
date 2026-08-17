@@ -25,11 +25,17 @@ jobs:
             Write-Host 'choco already installed'
           }
 
-      - name: Install Lazarus & FPC
+      - name: Install Lazarus (includes FPC)
         shell: powershell
         run: |
           choco install lazarus -y --no-progress
-          choco install fpc -y --no-progress
+
+      - name: Add Lazarus to PATH
+        shell: powershell
+        run: |
+          echo "C:\lazbuild" >> $env:GITHUB_PATH
+          # Alternatively, add the standard Lazarus bin path if lazbuild is located there:
+          echo "C:\lazarus" >> $env:GITHUB_PATH
 
       - name: Verify lazbuild
         shell: powershell
@@ -42,10 +48,18 @@ jobs:
           cd UniService
           lazbuild UniService.lpi
 
+      - name: Build UniController
+        shell: powershell
+        run: |
+          cd UniController
+          lazbuild UniController.lpi
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: uniservice-build
+          name: uniserver-builds
           path: |
             UniService/UniService.exe
+            UniController/UniController.exe
             UniService/*.exe
+            UniController/*.exe
