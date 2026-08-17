@@ -59,8 +59,8 @@ begin
  DirTemp := '';  // Set initial value
 
  //Replace \ with /
- BaseDir := StringReplace(BaseDirIn, '\','/',[rfReplaceAll]);
- Dir     := StringReplace(DirIn, '\','/',[rfReplaceAll]);
+ BaseDir := StringReplace(BaseDirIn, '\\','/',[rfReplaceAll]);
+ Dir     := StringReplace(DirIn, '\\','/',[rfReplaceAll]);
  Result := Dir;  // None of the below Return unchanged
 
  //Check already absolute and return unchanged.
@@ -237,7 +237,8 @@ begin
   for i:=0 to sList_Files.Count-1 do              // Scan file line by line
    begin
      exe_name := ExtractFileName(sList_Files[i]); // Get File name
-     if ExecRegExpr('^httpd_[\d|\w]+\.exe$',  exe_name) Then
+     // allow names like httpd_2.4.68.exe, httpd_2.4.68-win64.exe, httpd_v2_4_68.exe etc.
+     if ExecRegExpr('^httpd_[\d\.\-v\w]+\.exe$',  exe_name) Then
       begin
          us_get_apache_exe := exe_name; // Set exe name
          Break;
@@ -271,7 +272,8 @@ begin
   for i:=0 to sList_Files.Count-1 do          // Scan file line by line
     begin
      exe_name := ExtractFileName(sList_Files[i]);  // Get File name
-     if ExecRegExpr('^mysqld_[\d|\w]+\.exe$',  exe_name) Then
+     // allow names like mysqld_9.7.exe, mysqld_9.7-win64.exe, mysqld_v9_7.exe etc.
+     if ExecRegExpr('^mysqld_[\d\.\-v\w]+\.exe$',  exe_name) Then
       begin
          us_get_mysql_exe := exe_name; // Set exe name
          Break;
@@ -354,7 +356,7 @@ function us_IsServiceRunning(ServiceName: string): boolean;
         begin
           // A missing service might throw a missing handle exception? No?
         {LogOutput('Error getting service information for ' + ServiceName +
-          '. Technical details: ' + E.ClassName + '/' + E.Message);}
+          '. Technical details: ' + E.ClassName + '/' + E.Message);} 
           Result := False;
           raise; //rethrow original exception
         end;
@@ -373,4 +375,3 @@ function us_IsServiceRunning(ServiceName: string): boolean;
   end;
 {End us_IsServiceRunning -----------------------------------------------------}
 end.
-
