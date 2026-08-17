@@ -38,4 +38,9 @@ With the working environment in place, you are ready to compile UniService as fo
     Last line displayed: Project "UniService" successfully built.
  6. UniService will run.
 
+ Supported versions (tested)
+ - Apache HTTP Server 2.4.68
+ - MySQL 9.7
+ - PHP up to 8.5
+
  You can now change code as required and re-compile.
