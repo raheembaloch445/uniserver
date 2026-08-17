@@ -12,9 +12,9 @@ No installation required! No registry dust! Just unpack and fire up!
 The base version which is suitable for most users is the 15_x_x_ZeroXV.exe that contains the following:
 
  * Unicontroller - The Uniform Server Controller
- * Apache
- * PHP
- * MySQL
+ * Apache (tested with Apache HTTP Server 2.4.68)
+ * PHP (support for PHP 7.0 through PHP 8.5)
+ * MySQL (support for MySQL 9.7 and MariaDB)
  * PhpMyAdmin
  * msmtp - A SMTP mail client
  * Cron Scheduler
@@ -33,11 +33,12 @@ The following are the optional plugins that can be used to enhance the Uniform S
 
 ### PHP
 
- * PHP 7.0 to 8.3
+ * PHP 7.0 to 8.5
 
 ### Database
 
  * MariaDB
+ * MySQL 9.7 (supported)
 
 ### Database Administration
 
