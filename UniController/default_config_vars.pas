@@ -178,7 +178,7 @@ Var
  US_PHP82          :String;  // PHP 82 root folder
  US_PHP83          :String;  // PHP 83 root folder
  US_PHP84          :String;  // PHP 84 root folder
- US_PHP83          :String;  // PHP 83 root folder
+ US_PHP85          :String;  // PHP 85 root folder
 
  US_PHP70_EXT      :String;  // PHP 70 extensions folder
  US_PHP71_EXT      :String;  // PHP 71 extensions folder
